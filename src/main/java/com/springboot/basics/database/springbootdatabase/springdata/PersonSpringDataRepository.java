@@ -1,5 +1,9 @@
 package com.springboot.basics.database.springbootdatabase.springdata;
 
-public interface PersonSpringDataRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.springboot.basics.database.springbootdatabase.entity.Person;
+
+public interface PersonSpringDataRepository extends JpaRepository<Person, Integer> {
 
 }

@@ -12,27 +12,28 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.springboot.basics.database.springbootdatabase.entity.Person;
 import com.springboot.basics.database.springbootdatabase.jdbc.PersonJdbcDao;
 import com.springboot.basics.database.springbootdatabase.jpa.PersonJpaRepository;
+import com.springboot.basics.database.springbootdatabase.springdata.PersonSpringDataRepository;
 
-//@SpringBootApplication
-public class JPADatabaseApplication implements CommandLineRunner{
+@SpringBootApplication
+public class SpringDataDemoApplication implements CommandLineRunner{
 
 	@Autowired
-	PersonJpaRepository repository;
+	PersonSpringDataRepository repository;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	public static void main(String[] args) {
-		SpringApplication.run(JPADatabaseApplication.class, args);
+		SpringApplication.run(SpringDataDemoApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		logger.info("User info {}",repository.findById(10001));
-		logger.info("inserting User {}",repository.insert(new Person(1,"Sara", "Toronto",new Date())));
-		logger.info("Update User {}",repository.update(new Person(1,"Sara", "Noida",new Date())));
-		logger.info("inserting User {}",repository.insert(new Person("Swati", "Delhi",new Date())));
+		logger.info("inserting User {}",repository.save(new Person(1,"Sara", "Toronto",new Date())));
+		logger.info("Update User {}",repository.save(new Person(1,"Sara", "Noida",new Date())));
+		logger.info("inserting User {}",repository.save(new Person("Swati", "Delhi",new Date())));
 		repository.deleteById(1);
-		logger.info("Update User {}",repository.update(new Person("Sara", "Noida",new Date())));
+		logger.info("Update User {}",repository.save(new Person("Sara", "Noida",new Date())));
 		logger.info("All Users {}",repository.findAll());
 		
 
