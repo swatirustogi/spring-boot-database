@@ -18,6 +18,22 @@ public class PersonJdbcDao {
 	JdbcTemplate jdbcTemplate;
 		
 	
+	class PersonRowMapper implements RowMapper<Person>
+	{
+
+		@Override
+		public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
+			// TODO Auto-generated method stub
+			Person person = new Person();
+			person.setId(rs.getInt("ID"));
+			person.setName(rs.getString("NAME"));
+			person.setLocation(rs.getString("LOCATION"));
+			person.setbirthdate(rs.getTimestamp("BIRTHDATE"));
+			
+			return null;
+		}
+		
+	}
 	//select * from person
 	public List<Person> findAll()
 	{
