@@ -24,6 +24,7 @@ public class SpringbootDatabaseApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		logger.info("All users {}",dao.findAll());
+		logger.info("User info {}",dao.findById(10001));
 		
 	}
 }
