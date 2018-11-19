@@ -1,10 +1,13 @@
 package com.springboot.basics.database.springbootdatabase.jdbc;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springboot.basics.database.springbootdatabase.entity.Person;
@@ -13,6 +16,8 @@ import com.springboot.basics.database.springbootdatabase.entity.Person;
 public class PersonJdbcDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+		
+	
 	//select * from person
 	public List<Person> findAll()
 	{
@@ -25,5 +30,26 @@ public class PersonJdbcDao {
 				new Object[] {id},
 				new BeanPropertyRowMapper<Person>(Person.class)));
 	}
-
-}
+	public int deleteById(int id)
+	{
+		return(jdbcTemplate.update("delete from PERSON where id =?" , 
+				new Object[] {id}));
+	}
+	public int insert(Person person)
+	{
+		return(jdbcTemplate.update("INSERT INTO PERSON (id, name, location, birthdate) " + 
+				"VALUES(?, ?, ?,?)",new Object[] {person.getId(),person.getName(),
+				person.getLocation(),new java.sql.Timestamp(person.getbirthdate().getTime())}));
+		
+	}
+	
+	public int update(Person person)
+	{
+		return(jdbcTemplate.update("UPDATE PERSON "
+				+ "set name = ?, location = ?, birthdate = ?" + " where id = ?", 
+				new Object[] {person.getName(),person.getLocation(),
+						new java.sql.Timestamp(person.getbirthdate().getTime()), person.getId()}));
+	}	
+	
+	
+}	
