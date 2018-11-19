@@ -5,3 +5,4 @@ create table PERSON
 	location varchar(255),
 	birthdate timestamp
 );
+

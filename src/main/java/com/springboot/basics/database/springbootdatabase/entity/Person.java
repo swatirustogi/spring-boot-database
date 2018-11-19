@@ -2,22 +2,46 @@ package com.springboot.basics.database.springbootdatabase.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="PERSON")
+@NamedQuery(name="find_all_persons", query="select p from Person p")
 public class Person {
+	@Id
+	@GeneratedValue
 	private int id;
+	@Column(name="NAME")
 	private String name;
+	@Column(name="LOCATION")
 	private String location;
+	@Column(name="BIRTHDATE")
 	private Date birthdate;
 	
 	public Person() {}
+	
 	public Person(int id, String name, String location, Date birthdate) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.location = location;
-		this.birthdate = birthdate;
-		
+		this.birthdate = birthdate;	
 		
 	}
+	
+	public Person(String name, String location, Date birthdate) {
+		super();
+		this.name = name;
+		this.location = location;
+		this.birthdate = birthdate;	
+		
+	}
+	
 	public int getId() {
 		return id;
 	}

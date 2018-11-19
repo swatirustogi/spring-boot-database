@@ -1,4 +1,3 @@
-
 INSERT INTO PERSON (id, name, location, birthdate )
 VALUES(10001, 'Ranga', 'Hyderabad',sysdate());
 INSERT INTO PERSON (id, name, location, birthdate )
